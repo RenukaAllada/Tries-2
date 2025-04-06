@@ -1,4 +1,5 @@
 class Sample{
+    /********************PROBLEM-1******************/
     //TC:0(N*L)
     //SC:0(N*L)
     class Solution {
@@ -81,6 +82,40 @@ class Sample{
                 //backtrack
                 li.remove(li.size()-1);
             }
+        }
+    }
+
+    /********************PROBLEM-2******************/
+    //TC:0(N*L)
+    //SC:0(1)
+    class Solution {
+        public List<Boolean> camelMatch(String[] queries, String pattern) {
+            if(queries.length==0 || queries==null ){
+                return new ArrayList<>();
+            }
+            List<Boolean> result=new ArrayList<>();
+
+
+            for(String query:queries){
+                int i=0; //pattern pointer
+                boolean flag=true;
+                for(int j=0;j<query.length();j++){
+                    char c=query.charAt(j);
+                    if(i<pattern.length() && (c==pattern.charAt(i))){
+                        i++;
+                    }
+                    else if(Character.isUpperCase(c)){
+                        flag=false;
+                        break;
+                    }
+                }
+                if(flag==true && i==pattern.length()){
+                    result.add(true);
+                }else{
+                    result.add(false);
+                }
+            }
+            return result;
         }
     }
 }

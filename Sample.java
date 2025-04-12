@@ -118,4 +118,32 @@ class Sample{
             return result;
         }
     }
+
+    /********************PROBLEM-3*****************/
+    //TC:0(NLOGK)
+//SC:0(N)
+    class Solution {
+        public int[] topKFrequent(int[] nums, int k) {
+            if(nums==null ||nums.length==0){
+                return new int[]{};
+            }
+            HashMap<Integer,Integer> count=new HashMap<>();
+            int[] result=new int[k];
+            for(int i=0;i<nums.length;i++){
+                count.put(nums[i],count.getOrDefault(nums[i],0)+1);
+            }
+            PriorityQueue<Integer> heap=new PriorityQueue<>((a,b)->count.get(a)-count.get(b));
+            for(int key:count.keySet()){
+                heap.add(key);
+                if(heap.size()>k){
+                    heap.poll();
+                }
+            }
+
+            for(int i=0;i<k;i++){
+                result[i]=heap.poll();
+            }
+            return result;
+        }
+    }
 }
